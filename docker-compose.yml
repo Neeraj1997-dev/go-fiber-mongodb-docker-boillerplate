@@ -1,0 +1,23 @@
+version: '3'
+services:
+  # mongodb:
+  #   image: mongo
+  #   container_name: mongo_database
+  #   ports:
+  #     - "27017:27017"
+  microservice:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    container_name: mongo_api_service
+    environment:
+      - DEMO_SERVICE_PORT=3101
+      - DEMO_URL=mongodb://mongodb
+    ports:
+      - "3101:3101"
+    volumes:
+      - ./src:/app/src
+    # depends_on:
+    #   - mongodb
+    restart: on-failure
+  
